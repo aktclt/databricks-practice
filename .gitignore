@@ -1,0 +1,34 @@
+# Python virtualenvs (root has .venv311; .venv/ alone does not match that name)
+.venv/
+.venv*/
+venv/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# macOS
+.DS_Store
+
+.databricks
+.ai-dev-kit/
+.cursor/
+.vscode/
+.idea/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.eggs/
+.dist/
+.build/
+.dist/
+.build/

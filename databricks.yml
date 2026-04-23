@@ -1,0 +1,29 @@
+# This is a Databricks asset bundle definition for databricks-practice.
+# The Databricks extension requires databricks.yml configuration file.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: databricks-practice
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-6efcf852-ba89.cloud.databricks.com
+      root_path: /Workspace/Users/ashishtiwari1911@gmail.com/databricks-practice
+    sync:
+      exclude:
+        - ".venv/"
+        - ".venv311/"
+        - "__pycache__/"
+        - "**/*.pyc"
+        - ".git/"
+        - ".DS_Store"
+        - ".vscode/"
+
+  ## Optionally, there could be 'staging' or 'prod' targets here.
+  #
+  # prod:
+  #   workspace:
+  #     host: https://dbc-6efcf852-ba89.cloud.databricks.com
