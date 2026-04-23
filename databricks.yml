@@ -5,12 +5,27 @@
 bundle:
   name: databricks-practice
 
+include:
+  - resources/*.yml
+
+variables:
+  # SQL warehouse used by retail medallion SQL notebooks (Jobs). Override per target if needed.
+  sql_warehouse_id:
+    default: "b8677c6e54fb8ca2"
+  schedule_timezone:
+    default: "UTC"
+  # UNPAUSED = schedule active; PAUSED = deploy job without automatic runs until you unpause.
+  schedule_paused:
+    default: "UNPAUSED"
+
 targets:
   dev:
     mode: development
     default: true
     workspace:
       host: https://dbc-6efcf852-ba89.cloud.databricks.com
+      # Avoid "multiple profiles matched" when two profiles share this host; override if needed.
+      profile: DEFAULT
       root_path: /Workspace/Users/ashishtiwari1911@gmail.com/databricks-practice
     sync:
       exclude:

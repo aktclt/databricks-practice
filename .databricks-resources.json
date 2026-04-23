@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "resources": [
+    {
+      "type": "dashboard",
+      "name": "Retail \u2014 Gold key metrics (practice)",
+      "id": "01f13ee50df71f50bc739e2e41296e7f",
+      "created_at": "2026-04-23T07:31:12.108469+00:00",
+      "updated_at": "2026-04-23T07:31:12.108469+00:00",
+      "url": "https://dbc-6efcf852-ba89.cloud.databricks.com/sql/dashboardsv3/01f13ee50df71f50bc739e2e41296e7f"
+    }
+  ]
+}

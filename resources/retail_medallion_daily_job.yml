@@ -1,0 +1,43 @@
+# Multi-task job: Bronze → Silver → Gold (SQL notebooks + SQL warehouse).
+# Deploy: databricks bundle deploy
+# Run once:  databricks bundle run retail_medallion_daily
+# Change schedule or warehouse in databricks.yml (variables) or override per target.
+
+resources:
+  jobs:
+    retail_medallion_daily:
+      name: "[${bundle.target}] Retail medallion — daily (bronze / silver / gold)"
+      # One run at a time; daily window is enough for this workload.
+      max_concurrent_runs: 1
+
+      schedule:
+        # Daily at 06:00 in ${var.schedule_timezone} (edit expression or timezone as needed).
+        quartz_cron_expression: "0 0 6 * * ?"
+        timezone_id: ${var.schedule_timezone}
+        pause_status: ${var.schedule_paused}
+
+      tasks:
+        - task_key: bronze_incremental
+          description: Ingest from volume paths into practice.bronze (MERGE idempotent).
+          notebook_task:
+            notebook_path: ../notebooks/retail_medallion/01_bronze_incremental.ipynb
+            source: WORKSPACE
+            warehouse_id: ${var.sql_warehouse_id}
+
+        - task_key: silver_incremental
+          description: Rebuild silver dims / fact from bronze; quarantine invalid rows.
+          depends_on:
+            - task_key: bronze_incremental
+          notebook_task:
+            notebook_path: ../notebooks/retail_medallion/02_silver_incremental.ipynb
+            source: WORKSPACE
+            warehouse_id: ${var.sql_warehouse_id}
+
+        - task_key: gold_incremental
+          description: MERGE into practice.gold reporting tables.
+          depends_on:
+            - task_key: silver_incremental
+          notebook_task:
+            notebook_path: ../notebooks/retail_medallion/03_gold_incremental.ipynb
+            source: WORKSPACE
+            warehouse_id: ${var.sql_warehouse_id}

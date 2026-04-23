@@ -1,8 +1,9 @@
 -- Unity Catalog: practice catalog, separate schemas for bronze / silver / gold
 -- (Reference only — run once per workspace or as part of IaC/Job SQL task)
 --
--- Load & merge logic: notebooks/retail_medallion/01_bronze_incremental.py
---   → 02_silver_incremental.py → 03_gold_incremental.py
+-- Load & merge logic (SQL-first .ipynb): notebooks/retail_medallion/
+--   01_bronze_incremental.ipynb → 02_silver_incremental.ipynb → 03_gold_incremental.ipynb
+-- Regenerate from template: python3 scripts/build_retail_medallion_ipynb.py
 
 USE CATALOG practice;
 
